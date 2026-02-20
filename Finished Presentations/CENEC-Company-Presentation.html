@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENEC — Zero Emission Energy for Zero Emission Industry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CENEC STYLE SYSTEM
+           ============================================ */
+        :root {
+            --cenec-dark:        #1a1a2e;
+            --cenec-dark-alt:    #16213e;
+            --cenec-green:       #4ecca3;
+            --cenec-green-light: #7efcd2;
+            --cenec-green-dark:  #38a67e;
+            --cenec-white:       #ffffff;
+            --cenec-off-white:   #f0f4f3;
+            --cenec-gray-light:  #e0e6e4;
+            --cenec-gray:        #8a9a95;
+            --cenec-gray-dark:   #4a5568;
+            --gradient-dark:     linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            --gradient-accent:   linear-gradient(135deg, #4ecca3 0%, #38a67e 100%);
+            --font-heading:      'Montserrat', sans-serif;
+            --font-body:         'Open Sans', sans-serif;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-y: scroll; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--cenec-white);
+            background: var(--cenec-dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Slide base ────────────────────────────── */
+        .slide {
+            min-height: 100vh;
+            padding: 70px 90px 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+
+        .slide--dark {
+            background: var(--gradient-dark);
+            color: var(--cenec-white);
+        }
+
+        .slide--dark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(78,204,163,0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(78,204,163,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .slide--dark::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+        }
+
+        .slide--hero {
+            background: var(--cenec-dark);
+            color: var(--cenec-white);
+            text-align: center;
+            align-items: center;
+        }
+
+        .slide--hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(78,204,163,0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 20%, rgba(78,204,163,0.06) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .slide--chapter {
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide--chapter .chapter-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(22,33,62,0.9) 0%, rgba(26,26,46,0.78) 60%, rgba(78,204,163,0.08) 100%);
+        }
+
+        .slide--chapter .chapter-content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 70px 90px 110px;
+        }
+
+        .slide--image-only {
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ── Typography ────────────────────────────── */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+
+        .slide h1 { font-size: clamp(2.4rem, 4.5vw, 4.2rem); font-weight: 800; margin-bottom: 18px; }
+        .slide h2 { font-size: clamp(1.7rem, 3vw, 2.8rem); margin-bottom: 14px; }
+        .slide h3 { font-size: clamp(1.1rem, 1.8vw, 1.6rem); font-weight: 600; margin-bottom: 10px; }
+        .slide p  { font-size: clamp(0.95rem, 1.4vw, 1.15rem); font-weight: 300; opacity: 0.88; max-width: 760px; }
+
+        .text-accent { color: var(--cenec-green); }
+
+        .subtitle {
+            font-family: var(--font-heading);
+            font-size: clamp(0.75rem, 1vw, 0.95rem);
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cenec-green);
+            margin-bottom: 14px;
+        }
+
+        .divider { width: 56px; height: 3px; background: var(--gradient-accent); margin: 18px 0; border-radius: 2px; flex-shrink: 0; }
+        .divider--center { margin: 18px auto; }
+
+        /* ── Logo ──────────────────────────────────── */
+        .cenec-logo-img  { height: 44px; width: auto; object-fit: contain; }
+        .cenec-logo-text { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 900; text-transform: uppercase; }
+        .cenec-logo-text span { color: var(--cenec-green); }
+
+        /* ── Two-column layout ─────────────────────── */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; width: 100%; }
+        .two-col--wide-left  { grid-template-columns: 1.45fr 1fr; }
+        .two-col--wide-right { grid-template-columns: 1fr 1.45fr; }
+
+        /* ── Image wrap ────────────────────────────── */
+        .img-wrap { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(78,204,163,0.18); background: rgba(255,255,255,0.03); }
+        .img-wrap img { width: 100%; height: auto; display: block; }
+        .img-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(78,204,163,0.08) 0%, rgba(26,26,46,0.5) 100%); border-radius: 12px; border: 1px solid rgba(78,204,163,0.18); display: flex; align-items: center; justify-content: center; color: var(--cenec-green); font-family: var(--font-heading); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+
+        /* ── Feature list ──────────────────────────── */
+        .feature-list { list-style: none; margin-top: 18px; }
+        .feature-list li { padding: 7px 0 7px 28px; position: relative; font-size: clamp(0.88rem, 1.3vw, 1.05rem); font-weight: 300; opacity: 0.88; line-height: 1.5; }
+        .feature-list li::before { content: '→'; position: absolute; left: 0; color: var(--cenec-green); font-weight: 700; }
+
+        /* ── Step list ─────────────────────────────── */
+        .step-list { list-style: none; margin-top: 18px; counter-reset: step; }
+        .step-list li { padding: 9px 0 9px 42px; position: relative; font-size: clamp(0.88rem, 1.3vw, 1.05rem); font-weight: 300; opacity: 0.88; counter-increment: step; line-height: 1.5; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 9px; width: 26px; height: 26px; background: var(--gradient-accent); border-radius: 50%; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 800; color: var(--cenec-dark); line-height: 26px; text-align: center; }
+
+        /* ── TOC ───────────────────────────────────── */
+        .toc-list { list-style: none; margin-top: 28px; max-width: 700px; }
+        .toc-item { display: flex; align-items: center; gap: 28px; padding: 20px 0; border-bottom: 1px solid rgba(78,204,163,0.1); transition: all 0.3s ease; }
+        .toc-item:last-child { border-bottom: none; }
+        .toc-item:hover .toc-title { color: var(--cenec-green); }
+        .toc-number { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; color: var(--cenec-green); min-width: 28px; opacity: 0.8; }
+        .toc-title { font-family: var(--font-heading); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; transition: color 0.3s ease; }
+
+        /* ── Storage cards (4-up grid) ─────────────── */
+        .storage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+        .storage-card { background: rgba(78,204,163,0.06); border: 1px solid rgba(78,204,163,0.16); border-radius: 10px; padding: 20px; transition: all 0.3s ease; }
+        .storage-card:hover { background: rgba(78,204,163,0.11); border-color: rgba(78,204,163,0.35); transform: translateY(-2px); }
+        .storage-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+        .storage-card-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 700; color: var(--cenec-green); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+        .storage-card-label { font-family: var(--font-heading); font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+        .storage-card-desc { font-size: 0.82rem; font-weight: 300; opacity: 0.7; line-height: 1.5; }
+
+        /* ── IP Portfolio grid ─────────────────────── */
+        .ip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 22px; }
+        .ip-card { background: rgba(78,204,163,0.06); border: 1px solid rgba(78,204,163,0.18); border-radius: 8px; padding: 14px 18px; font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; text-align: center; letter-spacing: 0.03em; transition: all 0.3s ease; opacity: 0; }
+        .ip-card.animate-in { animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .ip-card:hover { background: rgba(78,204,163,0.14); border-color: rgba(78,204,163,0.4); }
+        .ip-card.more { background: rgba(78,204,163,0.12); border-color: rgba(78,204,163,0.35); color: var(--cenec-green); }
+
+        /* ── Stat callouts ─────────────────────────── */
+        .stat-callouts { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-callout { background: rgba(78,204,163,0.08); border: 1px solid rgba(78,204,163,0.25); border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 120px; text-align: center; }
+        .stat-callout-value { font-family: var(--font-heading); font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 800; color: var(--cenec-green); line-height: 1; }
+        .stat-callout-label { font-family: var(--font-heading); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.65; margin-top: 5px; }
+
+        /* ── Assessment box ────────────────────────── */
+        .assessment-box { background: rgba(78,204,163,0.07); border: 1px solid rgba(78,204,163,0.22); border-left: 4px solid var(--cenec-green); border-radius: 8px; padding: 14px 20px; margin-top: 18px; font-size: clamp(0.88rem, 1.3vw, 1.02rem); font-weight: 300; font-style: italic; opacity: 0.9; line-height: 1.6; }
+
+        /* ── Partner badge ─────────────────────────── */
+        .partner-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(78,204,163,0.1); border: 1px solid rgba(78,204,163,0.25); border-radius: 20px; padding: 6px 14px; font-family: var(--font-heading); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cenec-green); margin-bottom: 14px; }
+        .partner-badge::before { content: '⬡'; font-size: 0.8rem; }
+
+        /* ── Photo collage ─────────────────────────── */
+        .photo-grid-wrap { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+        .photo-cell { position: relative; overflow: hidden; }
+        .photo-cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .photo-cell:hover img { transform: scale(1.03); }
+        .photo-cell-placeholder { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(22,33,62,0.9) 0%, rgba(26,26,46,0.7) 100%); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cenec-green); opacity: 0.7; }
+        .photo-cell::after { content: ''; position: absolute; inset: 0; border-right: 1px solid rgba(78,204,163,0.1); }
+        .photo-cell:last-child::after { border-right: none; }
+
+        /* ── Process steps (horizontal) ────────────── */
+        .process-steps { display: flex; gap: 0; margin-top: 24px; align-items: stretch; }
+        .process-step { flex: 1; background: rgba(78,204,163,0.06); border: 1px solid rgba(78,204,163,0.16); border-right: none; padding: 16px 14px; text-align: center; position: relative; }
+        .process-step:last-child { border-right: 1px solid rgba(78,204,163,0.16); border-radius: 0 8px 8px 0; }
+        .process-step:first-child { border-radius: 8px 0 0 8px; }
+        .process-step-num { font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700; color: var(--cenec-green); letter-spacing: 0.1em; margin-bottom: 6px; opacity: 0.7; }
+        .process-step-title { font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; margin-bottom: 5px; }
+        .process-step-desc { font-size: 0.82rem; font-weight: 300; opacity: 0.65; line-height: 1.4; }
+        .process-arrow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--cenec-green); font-size: 0.9rem; z-index: 1; }
+
+        /* ── CTA Button ────────────────────────────── */
+        .btn-cta { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 1rem; font-weight: 700; padding: 16px 40px; border-radius: 5px; border: none; cursor: pointer; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; background: var(--gradient-accent); color: var(--cenec-dark); box-shadow: 0 4px 24px rgba(78,204,163,0.35); transition: all 0.35s ease; margin-top: 22px; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(78,204,163,0.5); }
+        .btn-outline { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 1rem; font-weight: 600; padding: 15px 36px; border-radius: 5px; border: 2px solid rgba(78,204,163,0.6); cursor: pointer; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: var(--cenec-green); margin-top: 22px; transition: all 0.35s ease; }
+        .btn-outline:hover { background: rgba(78,204,163,0.1); border-color: var(--cenec-green); transform: translateY(-2px); }
+
+        /* ── Solutions intro cards ─────────────────── */
+        .solutions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; width: 100%; }
+        .solution-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(78,204,163,0.14); border-radius: 10px; padding: 20px 16px; transition: all 0.3s ease; text-align: center; }
+        .solution-card:hover { background: rgba(78,204,163,0.08); border-color: rgba(78,204,163,0.3); transform: translateY(-3px); }
+        .solution-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .solution-card-title { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--cenec-green); margin-bottom: 6px; }
+        .solution-card-desc { font-size: 0.78rem; font-weight: 300; opacity: 0.65; line-height: 1.4; }
+
+        /* ── Slide footer ──────────────────────────── */
+        .slide-footer { position: absolute; bottom: 62px; left: 90px; right: 90px; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; opacity: 0.35; font-family: var(--font-heading); letter-spacing: 0.12em; text-transform: uppercase; z-index: 5; }
+
+        /* ── Nav dots ──────────────────────────────── */
+        .nav-dots { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 200; }
+        .nav-dot { width: 8px; height: 8px; border-radius: 50%; border: 2px solid rgba(78,204,163,0.4); background: transparent; cursor: pointer; transition: all 0.3s ease; }
+        .nav-dot:hover, .nav-dot.active { background: var(--cenec-green); border-color: var(--cenec-green); box-shadow: 0 0 10px rgba(78,204,163,0.45); }
+
+        /* ── Bottom nav tab bar ────────────────────── */
+        .nav-tab-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 300; height: 50px; display: flex; align-items: stretch; justify-content: center; background: rgba(20,28,50,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid rgba(78,204,163,0.1); }
+        .nav-tab-items { display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .nav-tab-items::-webkit-scrollbar { display: none; }
+        .nav-tab-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 13px; cursor: pointer; position: relative; transition: background 0.22s ease; border-bottom: 2px solid transparent; white-space: nowrap; min-width: 50px; flex-shrink: 0; }
+        .nav-tab-item:hover { background: rgba(78,204,163,0.06); }
+        .nav-tab-item.active { border-bottom-color: var(--cenec-green); background: rgba(78,204,163,0.05); }
+        .nav-tab-num { font-family: var(--font-heading); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); transition: color 0.22s ease; line-height: 1; }
+        .nav-tab-item:hover .nav-tab-num, .nav-tab-item.active .nav-tab-num { color: var(--cenec-green); }
+        .nav-tab-name { font-family: var(--font-heading); font-size: 0.52rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.2); transition: color 0.22s ease; margin-top: 3px; line-height: 1; }
+        .nav-tab-item:hover .nav-tab-name, .nav-tab-item.active .nav-tab-name { color: rgba(255,255,255,0.55); }
+        .nav-tab-divider { width: 1px; background: rgba(78,204,163,0.14); align-self: center; height: 20px; flex-shrink: 0; margin: 0 4px; }
+
+        /* ── Animations ────────────────────────────── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { opacity: 0; animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 1100px) { .slide { padding: 60px 60px 100px; } .slide-footer { left: 60px; right: 60px; } .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 900px) { .slide { padding: 50px 36px 90px; } .two-col, .two-col--wide-left, .two-col--wide-right { grid-template-columns: 1fr; gap: 28px; } .storage-grid { grid-template-columns: 1fr; } .solutions-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid-wrap { grid-template-columns: 1fr; } .slide-footer { left: 36px; right: 36px; } }
+        @media print { .slide { page-break-after: always; min-height: auto; padding: 40px; } .nav-dots, .nav-tab-bar { display: none; } }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Dots — 19 slides -->
+    <nav class="nav-dots" id="navDots">
+        <div class="nav-dot active" onclick="scrollToSlide(0)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(1)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(2)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(3)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(4)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(5)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(6)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(7)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(8)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(9)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(10)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(11)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(12)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(13)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(14)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(15)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(16)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(17)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(18)"></div>
+    </nav>
+
+    <!-- Bottom Tab Bar -->
+    <nav class="nav-tab-bar" id="navTabBar">
+        <div class="nav-tab-items" id="navTabItems">
+            <div class="nav-tab-item active" onclick="scrollToSlide(0)"><span class="nav-tab-num">01</span><span class="nav-tab-name">Title</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(1)"><span class="nav-tab-num">02</span><span class="nav-tab-name">Contents</span></div>
+            <div class="nav-tab-divider"></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(2)"><span class="nav-tab-num">03</span><span class="nav-tab-name">Ch. 01</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(3)"><span class="nav-tab-num">04</span><span class="nav-tab-name">Industry</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(4)"><span class="nav-tab-num">05</span><span class="nav-tab-name">Electrostate</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(5)"><span class="nav-tab-num">06</span><span class="nav-tab-name">Capabilities</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(6)"><span class="nav-tab-num">07</span><span class="nav-tab-name">IP Portfolio</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(7)"><span class="nav-tab-num">08</span><span class="nav-tab-name">SAPP</span></div>
+            <div class="nav-tab-divider"></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(8)"><span class="nav-tab-num">09</span><span class="nav-tab-name">Ch. 02</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(9)"><span class="nav-tab-num">10</span><span class="nav-tab-name">Storage</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(10)"><span class="nav-tab-num">11</span><span class="nav-tab-name">BESS</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(11)"><span class="nav-tab-num">12</span><span class="nav-tab-name">Ind. Heat</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(12)"><span class="nav-tab-num">13</span><span class="nav-tab-name">Steam</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(13)"><span class="nav-tab-num">14</span><span class="nav-tab-name">Solar</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(14)"><span class="nav-tab-num">15</span><span class="nav-tab-name">Wind</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(15)"><span class="nav-tab-num">16</span><span class="nav-tab-name">Modelling</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(16)"><span class="nav-tab-num">17</span><span class="nav-tab-name">Development</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(17)"><span class="nav-tab-num">18</span><span class="nav-tab-name">Hydrogen</span></div>
+            <div class="nav-tab-item" onclick="scrollToSlide(18)"><span class="nav-tab-num">19</span><span class="nav-tab-name">Thank You</span></div>
+        </div>
+    </nav>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 1 — TITLE / HERO
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--hero" id="slide-0">
+        <div class="animate-in" style="animation-delay: 0s;">
+            <img src="../assets/CENECLogoDark.png" alt="CENEC" class="cenec-logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="cenec-logo-text" style="display:none;">CEN<span>EC</span></span>
+        </div>
+        <div style="height: 28px;"></div>
+        <p class="subtitle animate-in" style="animation-delay: 0.2s;">Company Overview</p>
+        <h1 class="animate-in" style="animation-delay: 0.35s;">
+            Zero Emission Energy<br>for <span class="text-accent">Zero Emission Industry</span>
+        </h1>
+        <div class="divider divider--center animate-in" style="animation-delay: 0.5s;"></div>
+        <p class="animate-in" style="animation-delay: 0.65s; text-align: center; opacity: 0.65; margin: 0 auto;">
+            Pioneering integrated technologies to electrify and decarbonize<br>
+            industrial and commercial operations.
+        </p>
+        <div class="slide-footer">
+            <span>CENEC © 2025</span>
+            <span>Confidential</span>
+        </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 2 — TABLE OF CONTENTS
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-1">
+        <p class="subtitle animate-in">Overview</p>
+        <h2 class="animate-in" style="animation-delay: 0.15s;">Table of <span class="text-accent">Contents</span></h2>
+        <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+        <ul class="toc-list animate-in" style="animation-delay: 0.45s; width: 100%;">
+            <li class="toc-item">
+                <span class="toc-number">01</span>
+                <span class="toc-title">Introduction — CENEC & Industrial Decarbonization</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-number">02</span>
+                <span class="toc-title">Our Solutions — Storage, Heat, Steam, Solar, Wind & More</span>
+            </li>
+        </ul>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>02</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 3 — CHAPTER 1: Industrial Decarbonization
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--chapter" id="slide-2" style="background-image: url('../assets/ClimateAction.png');">
+        <div class="chapter-overlay"></div>
+        <div class="chapter-content">
+            <p class="subtitle animate-in">Chapter 01</p>
+            <h1 class="animate-in" style="animation-delay: 0.2s;">Industrial<br><span class="text-accent">Decarbonization</span></h1>
+            <div class="divider divider--center animate-in" style="animation-delay: 0.4s;"></div>
+            <p class="animate-in" style="animation-delay: 0.55s; text-align: center; max-width: 560px; opacity: 0.8;">CENEC & the pathway to zero-emission industry</p>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>03</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 4 — INDUSTRIAL PHOTO COLLAGE
+         ══════════════════════════════════════════ -->
+    <section class="slide" id="slide-3" style="padding:0; background: var(--cenec-dark); min-height:100vh; position:relative;">
+        <div class="photo-grid-wrap">
+            <div class="photo-cell">
+                <img src="../assets/Industrial1.png" alt="Industrial" onerror="this.style.display='none';">
+                <div class="photo-cell-placeholder">Industrial 1</div>
+            </div>
+            <div class="photo-cell">
+                <img src="../assets/Industrial2.png" alt="Industrial" onerror="this.style.display='none';">
+                <div class="photo-cell-placeholder">Industrial 2</div>
+            </div>
+            <div class="photo-cell">
+                <img src="../assets/Industrial3.png" alt="Industrial" onerror="this.style.display='none';">
+                <div class="photo-cell-placeholder">Industrial 3</div>
+            </div>
+        </div>
+        <div class="slide-footer" style="z-index:5;"><span>CENEC © 2025</span><span>04</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 5 — BECOMING AN ELECTROSTATE
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-4">
+        <div class="two-col two-col--wide-left">
+            <div>
+                <p class="subtitle animate-in">South Africa</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Becoming an <span class="text-accent">Electrostate</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">South Africa is poised to become an electrostate — unlocking massive growth by electrifying transport, industry and private life through renewables.</p>
+                <ol class="step-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Decarbonize and electrify the power system, replacing coal with clean energy.</li>
+                    <li>Electrify different sectors to substitute fossil molecules with electrons.</li>
+                </ol>
+                <p class="animate-in" style="animation-delay: 0.75s; margin-top: 14px;">CENEC drives this transition by decarbonizing industry in parallel with power sector transformation — creating synergies for green hydrogen, advanced manufacturing and low-carbon exports.</p>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.4s;">
+                <div class="img-wrap">
+                    <img src="../assets/GlobalFinalEnergy.png" alt="Global Final Energy"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Global Final Energy</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>05</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 6 — CENEC CAPABILITIES
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-5">
+        <div class="two-col two-col--wide-right">
+            <div class="animate-in" style="display: flex; align-items: center; height: 100%;">
+                <img src="../assets/GreenFactory.png" alt="Green Factory" style="width: 110%; max-width: none; height: auto; border-radius: 12px; display: block;"
+                     onerror="this.outerHTML='<div class=\'img-placeholder\'>Green Factory</div>';">
+            </div>
+            <div>
+                <div class="animate-in" style="margin-bottom: 12px;">
+                    <img src="../assets/CENECLogoDark.png" alt="CENEC" style="height:32px; width:auto;"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="cenec-logo-text" style="display:none; font-size:1.1rem;">CEN<span>EC</span></span>
+                </div>
+                <p class="subtitle animate-in" style="animation-delay: 0.1s;">Industrial Decarbonization</p>
+                <h2 class="animate-in" style="animation-delay: 0.2s;">A Complete <span class="text-accent">Value Chain</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.35s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">CENEC has built an extensive network targeting industrial decarbonization across the whole development and value chain:</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Innovative technology providers</li>
+                    <li>Consulting engineers (civil, legal, electrical & infrastructure)</li>
+                    <li>Chemical &amp; mechanical engineering</li>
+                    <li>In-house specialists for land assembly</li>
+                    <li>Environmental screening and permitting</li>
+                    <li>Contractual framework &amp; project structure</li>
+                </ul>
+                <p class="animate-in" style="animation-delay: 0.75s; margin-top: 14px; font-size: 0.9rem; opacity: 0.7;">Strategically positioned to address approximately <strong style="color: var(--cenec-green);">30% of global CO₂ emissions</strong> from industry.</p>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>06</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 7 — IP PORTFOLIO
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-6">
+        <div class="two-col two-col--wide-left">
+            <div>
+                <p class="subtitle animate-in">Innovation</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Industrial <span class="text-accent">Decarbonization</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.4s;">CENEC has built a strong portfolio of partners and technologies enabling re-industrialization for South Africa in a green way.</p>
+                <div class="ip-grid" id="ipGrid">
+                    <div class="ip-card">Methanol Synthesis</div>
+                    <div class="ip-card">Syngas Reformer</div>
+                    <div class="ip-card">Pressure Reformer (Biomass)</div>
+                    <div class="ip-card">High Temperature Storage</div>
+                    <div class="ip-card">Hydrogen Storage</div>
+                    <div class="ip-card">Innovative Pipeline Technology</div>
+                    <div class="ip-card">Long Duration Energy Storage</div>
+                    <div class="ip-card">Innovative Heat Pump Technology</div>
+                    <div class="ip-card">Cross-Sector Energy Modelling</div>
+                    <div class="ip-card more">+ And more…</div>
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/IndustrialDecarbonization1.png" alt="Industrial Decarbonization"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Industrial Decarbonization</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>07</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 8 — SOUTH AFRICAN POWER POOL
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-7">
+        <div class="two-col">
+            <div>
+                <p class="subtitle animate-in">Regional Energy Market</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">South African <span class="text-accent">Power Pool</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">The SAPP, linking 12 SADC countries, faces a <strong style="color: var(--cenec-green);">4,200 MW power deficit</strong> but is rapidly evolving — trading volumes are growing and private players are entering the market.</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Grid expansion: connecting Malawi, Tanzania & Angola by 2028</li>
+                    <li>ReTrade SAPP modernisation, backed by the World Bank</li>
+                    <li>Dedicated green power market under development</li>
+                    <li>Billions unlocked for cross-border renewable infrastructure</li>
+                </ul>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.4s;">
+                <div class="img-wrap">
+                    <img src="../assets/SAPowerPool.png" alt="SA Power Pool"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>SA Power Pool</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>08</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 9 — CHAPTER 2: Our Solutions
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--chapter" id="slide-8" style="background-image: url('../assets/cenec-industrial-render.png');">
+        <div class="chapter-overlay"></div>
+        <div class="chapter-content">
+            <p class="subtitle animate-in">Chapter 02</p>
+            <h1 class="animate-in" style="animation-delay: 0.2s;">Our <span class="text-accent">Solutions</span></h1>
+            <div class="divider divider--center animate-in" style="animation-delay: 0.4s;"></div>
+            <p class="animate-in" style="animation-delay: 0.55s; text-align: center; max-width: 640px; opacity: 0.8;">Storage · Industrial Heat · Low-Carbon Steam · Solar · Wind · Energy Modelling · Project Development · Hydrogen Storage</p>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>09</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 10 — STORAGE TECHNOLOGIES OVERVIEW
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-9">
+        <div class="two-col two-col--wide-left">
+            <div>
+                <p class="subtitle animate-in">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Storage <span class="text-accent">Technologies</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.4s;">Renewable energy from solar and wind are the cheapest form of energy production — but the sun doesn't always shine, and the wind doesn't always blow. CENEC's storage technologies bridge that gap.</p>
+                <div class="storage-grid animate-in" style="animation-delay: 0.55s;">
+                    <div class="storage-card">
+                        <div class="storage-card-icon">⚡</div>
+                        <div class="storage-card-title">BESS</div>
+                        <div class="storage-card-label">Battery Energy Storage</div>
+                        <div class="storage-card-desc">Lithium technology, reliable power up to 5 hours</div>
+                    </div>
+                    <div class="storage-card">
+                        <div class="storage-card-icon">🔋</div>
+                        <div class="storage-card-title">LDES</div>
+                        <div class="storage-card-label">Long Duration Storage</div>
+                        <div class="storage-card-desc">Extended duration — coming soon</div>
+                    </div>
+                    <div class="storage-card">
+                        <div class="storage-card-icon">🌡️</div>
+                        <div class="storage-card-title">TES</div>
+                        <div class="storage-card-label">Thermal Energy Storage</div>
+                        <div class="storage-card-desc">High-temperature heat, 24/7/365 delivery</div>
+                    </div>
+                    <div class="storage-card">
+                        <div class="storage-card-icon">💧</div>
+                        <div class="storage-card-title">H₂ Storage</div>
+                        <div class="storage-card-label">Hydrogen Storage</div>
+                        <div class="storage-card-desc">Steam-iron process, lowest cost available</div>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/cenec-batteries.png" alt="Battery Storage"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Battery Storage</div>';">
+                </div>
+                <div class="img-wrap" style="margin-top: 14px;">
+                    <img src="../assets/cenec-iron-container.png" alt="Iron Energy Container"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Iron Energy</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>10</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 11 — BESS DETAIL
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-10">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <p class="subtitle animate-in">Storage Technologies</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;"><span class="text-accent">Battery Energy Storage</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">We utilize cutting-edge battery storage technology for efficient short-term, long-term and ultra-long-term storage, delivering reliable power for all applications.</p>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.6s;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">8 <span style="font-size:0.55em; font-weight:400;">hrs</span></div>
+                        <div class="stat-callout-label">BESS Max Dispatch</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">40 <span style="font-size:0.55em; font-weight:400;">hrs</span></div>
+                        <div class="stat-callout-label">LDES Max Dispatch</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">100 <span style="font-size:0.55em; font-weight:400;">hrs</span></div>
+                        <div class="stat-callout-label">ULDES Max Dispatch</div>
+                    </div>
+                </div>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.7s;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">24/7</div>
+                        <div class="stat-callout-label">Availability</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">0</div>
+                        <div class="stat-callout-label">Emissions</div>
+                    </div>
+                </div>
+                <div class="assessment-box animate-in" style="animation-delay: 0.8s;">
+                    We select the right storage technology dependent on the application — be it grid stabilization, peak shaving, or renewable energy integration at industrial sites.
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <img src="../assets/cenec-batteries.png" alt="Battery Storage" style="width: 100%; height: auto; border-radius: 12px; display: block;"
+                     onerror="this.outerHTML='<div class=\'img-placeholder\'>Battery Storage</div>';">
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>11</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 12 — INDUSTRIAL HIGH-TEMPERATURE HEAT
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-11">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <div class="partner-badge animate-in">Partner: AED Energy</div>
+                <p class="subtitle animate-in" style="animation-delay: 0.1s;">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.2s;">Industrial <span class="text-accent">High-Temperature Heat</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.35s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">CENEC partners with AED Energy to deliver thermal energy storage systems converting renewable power into high-temperature heat for industrial applications.</p>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.6s;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">750<span style="font-size:0.5em; font-weight:400;">°C</span></div>
+                        <div class="stat-callout-label">Max Temperature</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">10x</div>
+                        <div class="stat-callout-label">Lower Cost vs Li-ion</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">10<span style="font-size:0.5em; font-weight:400;">MWh</span></div>
+                        <div class="stat-callout-label">Modular Units</div>
+                    </div>
+                </div>
+                <ul class="feature-list animate-in" style="animation-delay: 0.75s;">
+                    <li>10+ hours to days of reliable heat on demand</li>
+                    <li>Non-toxic, non-flammable — no thermal runaway risk</li>
+                    <li>Applications: food processing, refineries, mining, drying</li>
+                </ul>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/cenec-heat-apps.jpg" alt="Industrial Heat Applications"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Industrial Heat</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>12</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 13 — LOW-CARBON STEAM
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-12">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <div class="partner-badge animate-in">Partner: AtmosZero</div>
+                <p class="subtitle animate-in" style="animation-delay: 0.1s;">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.2s;">Low-Carbon <span class="text-accent">Steam</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.35s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">CENEC partners with AtmosZero to replace electric or fossil-fuel boilers with innovative steam-generating heat pump technology — capturing ambient heat and converting it to decarbonized steam.</p>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.6s;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">165<span style="font-size:0.5em; font-weight:400;">°C</span></div>
+                        <div class="stat-callout-label">Saturated Steam</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">2×</div>
+                        <div class="stat-callout-label">More Efficient</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">0</div>
+                        <div class="stat-callout-label">Carbon Emissions</div>
+                    </div>
+                </div>
+                <div class="assessment-box animate-in" style="animation-delay: 0.75s;">
+                    Achieve Scope 1 &amp; 2 emissions targets. Ideal for food &amp; beverage and chemical industry applications.
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/cenec-steam.png" alt="Low Carbon Steam"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Low-Carbon Steam</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>13</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 14 — SOLAR ENERGY
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-13">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <p class="subtitle animate-in">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Solar <span class="text-accent">Energy</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">Solar is already the energy source with the lowest cost at point of production. CENEC integrates this cheap, renewable power directly into your industrial applications and processes.</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Already the <strong style="color:var(--cenec-green);">lowest-cost energy source</strong> at point of production</li>
+                    <li>On-site integration or innovative wheeling &amp; trading options</li>
+                    <li>Holistic approach to industrial energy supply &amp; mobility</li>
+                    <li>Enables circular production and circular economy</li>
+                    <li>Perfectly paired with wind and storage for 24/7 supply</li>
+                </ul>
+                <div class="assessment-box animate-in" style="animation-delay: 0.75s;">
+                    The future of industry &amp; mobility is clean, sustainable and powered by nature.
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/solar.jpg" alt="Solar Farm"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Solar Energy</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>14</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 15 — WIND POWER
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-14">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <p class="subtitle animate-in">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Wind <span class="text-accent">Power</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">Wind power will drive a cleaner, more sustainable future for industry and mobility — providing abundant, zero-emission energy that reduces reliance on fossil fuels.</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Established and <strong style="color:var(--cenec-green);">emerging wind technologies</strong> monitored</li>
+                    <li>Experience developing wind projects for industrial applications</li>
+                    <li>Technical lead on Prieska Power Reserve — green chemicals production</li>
+                    <li>Wind + solar hybrid for near-continuous clean power</li>
+                    <li>Winter-dominant wind profile ideal for green hydrogen production</li>
+                </ul>
+                <div class="assessment-box animate-in" style="animation-delay: 0.75s;">
+                    CENEC was technical lead in developing the Prieska Power Reserve, where wind powers green hydrogen &amp; ammonia production.
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/WindFarm.png" alt="Wind Farm"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Wind Power</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>15</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 16 — ENERGY SYSTEM MODELLING
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-15">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <p class="subtitle animate-in">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Energy System <span class="text-accent">Modelling</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">Every industrial application is different. CENEC analyses specific processes in detail, using leading software to create digital twins for modelling, analysing, and simulating complex energy systems.</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li><strong style="color:var(--cenec-green);">Digital twin</strong> modelling of your industrial process</li>
+                    <li>Electrical power, process heat/steam &amp; power-to-X analysis</li>
+                    <li>Generation &amp; storage optimisation</li>
+                    <li>Detailed technical &amp; financial analysis of optimisation potential</li>
+                    <li>Hydrogen storage modelling integration</li>
+                </ul>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.75s;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value" style="font-size: 1.4rem;">Digital</div>
+                        <div class="stat-callout-label">Twin Modelling</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value" style="font-size: 1.4rem;">P2X</div>
+                        <div class="stat-callout-label">Power-to-X Ready</div>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/cenec-bess-graph.png" alt="Energy Modelling Graph"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Energy Modelling</div>';">
+                </div>
+                <div class="img-wrap" style="margin-top:14px;">
+                    <img src="../assets/GlobalFinalEnergy.png" alt="Energy Systems"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Energy Systems</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>16</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 17 — PROJECT DEVELOPMENT
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-16">
+        <div class="two-col two-col--wide-left">
+            <div>
+                <p class="subtitle animate-in">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.15s;">Project <span class="text-accent">Development</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.3s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">Decarbonizing industry requires a strategic approach integrating innovation, scalability, sustainability and feasibility. CENEC targets industrial sectors with high carbon footprints and high potential to decarbonize.</p>
+                <ul class="feature-list animate-in" style="animation-delay: 0.6s;">
+                    <li>Access to low-cost solar &amp; wind power</li>
+                    <li>LDES, zero-carbon steam &amp; high-temperature heat integration</li>
+                    <li>Green molecule production into custom solutions</li>
+                    <li>Collaboration with industry leaders, policymakers &amp; investors</li>
+                    <li>AI-driven energy management for efficiency optimisation</li>
+                    <li>Seamless transition to carbon-free operations</li>
+                </ul>
+                <div class="assessment-box animate-in" style="animation-delay: 0.8s;">
+                    Ensuring long-term sustainability and profitability — industries stay competitive while complying with increasingly high sustainable standards.
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s;">
+                <div class="img-wrap">
+                    <img src="../assets/cenec-industrial-render.png" alt="Industrial Rendering"
+                         onerror="this.outerHTML='<div class=\'img-placeholder\'>Project Development</div>';">
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>17</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 18 — HYDROGEN STORAGE SYSTEM
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--dark" id="slide-17">
+        <div class="two-col two-col--wide-right">
+            <div>
+                <div class="partner-badge animate-in">Partner: Iron Energy</div>
+                <p class="subtitle animate-in" style="animation-delay: 0.1s;">Solutions</p>
+                <h2 class="animate-in" style="animation-delay: 0.2s;">Hydrogen Storage <span class="text-accent">System</span></h2>
+                <div class="divider animate-in" style="animation-delay: 0.35s;"></div>
+                <p class="animate-in" style="animation-delay: 0.45s;">CENEC partners with Iron Energy to provide advanced hydrogen storage using the <strong style="color:var(--cenec-green);">Steam Iron Process</strong> — cost-effective, scalable solutions for storing surplus green hydrogen.</p>
+                <div class="stat-callouts animate-in" style="animation-delay: 0.6s; gap: 20px;">
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">90%</div>
+                        <div class="stat-callout-label">Cost Reduction</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">200<span style="font-size:0.5em; font-weight:400;">MWh</span></div>
+                        <div class="stat-callout-label">Modular Units</div>
+                    </div>
+                    <div class="stat-callout">
+                        <div class="stat-callout-value">GWh</div>
+                        <div class="stat-callout-label">Scalable to</div>
+                    </div>
+                </div>
+                <p class="animate-in" style="animation-delay: 0.68s; opacity: 0.88; margin: 0 0 2px 0;">Our technology is based on the steam-iron process which works in these 5 steps</p>
+                <div class="process-steps animate-in" style="animation-delay: 0.75s; margin-top: 0;">
+                    <div class="process-step">
+                        <div class="process-step-num">01</div>
+                        <div class="process-step-title">Produce</div>
+                        <div class="process-step-desc">H₂ from renewables</div>
+                        <span class="process-arrow">›</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-num">02</div>
+                        <div class="process-step-title">Charge</div>
+                        <div class="process-step-desc">React with iron oxide</div>
+                        <span class="process-arrow">›</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-num">03</div>
+                        <div class="process-step-title">Store</div>
+                        <div class="process-step-desc">Chemical storage</div>
+                        <span class="process-arrow">›</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-num">04</div>
+                        <div class="process-step-title">Release</div>
+                        <div class="process-step-desc">On demand</div>
+                        <span class="process-arrow">›</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-num">05</div>
+                        <div class="process-step-title">Use</div>
+                        <div class="process-step-desc">Ammonia · Iron · Fuels</div>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-in" style="animation-delay: 0.35s; display: flex; flex-direction: column; justify-content: center; gap: 28px; height: 100%; max-width: 85%; margin-left: auto;">
+                <img src="../assets/cenec-hydrogen.png" alt="Hydrogen Storage" style="width: 100%; max-height: 260px; object-fit: contain; border-radius: 12px; display: block;"
+                     onerror="this.outerHTML='<div class=\'img-placeholder\'>Hydrogen Storage</div>';">
+                <img src="../assets/cenec-hydrogen-process.png" alt="Hydrogen Process" style="width: 100%; max-height: 260px; object-fit: contain; border-radius: 12px; display: block;"
+                     onerror="this.outerHTML='<div class=\'img-placeholder\'>Steam Iron Process</div>';">
+            </div>
+        </div>
+        <div class="slide-footer"><span>CENEC © 2025</span><span>18</span></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 19 — THANK YOU / CTA
+         ══════════════════════════════════════════ -->
+    <section class="slide slide--chapter" id="slide-18" style="background-image: url('../assets/WindFarm.png');">
+        <div class="chapter-overlay" style="background: linear-gradient(135deg, rgba(22,33,62,0.93) 0%, rgba(26,26,46,0.82) 60%, rgba(78,204,163,0.1) 100%);"></div>
+        <div class="chapter-content">
+            <div class="animate-in" style="margin-bottom: 18px;">
+                <img src="../assets/CENECLogoDark.png" alt="CENEC" style="height:44px; width:auto;"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="cenec-logo-text" style="display:none;">CEN<span>EC</span></span>
+            </div>
+            <h1 class="animate-in" style="animation-delay: 0.2s; font-size: clamp(3rem, 6vw, 6rem);">The Transition<br><span class="text-accent">Starts Now</span></h1>
+            <div class="divider divider--center animate-in" style="animation-delay: 0.35s;"></div>
+            <p class="animate-in" style="animation-delay: 0.5s; text-align: center; max-width: 600px; font-size: 1.1rem; opacity: 0.85;">Ready to discuss what CENEC can do for your industrial application?</p>
+            <div class="animate-in" style="animation-delay: 0.65s; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 8px;">
+                <a href="mailto:martin@cenec.com" class="btn-cta">Get in Touch →</a>
+                <a href="https://www.cenec.com" class="btn-outline" target="_blank">Visit cenec.com</a>
+            </div>
+            <p class="animate-in" style="animation-delay: 0.8s; margin-top: 32px; text-align: center; font-size: 0.8rem; opacity: 0.4; font-family: var(--font-heading); letter-spacing: 0.1em; text-transform: uppercase;">Zero Emission Energy · Zero Emission Industry</p>
+        </div>
+        <div class="slide-footer" style="color: rgba(255,255,255,0.3);">
+            <span>CENEC © 2025</span>
+            <span>Confidential</span>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        const slides       = document.querySelectorAll('.slide');
+        const navDots      = document.querySelectorAll('.nav-dot');
+        const navTabItems  = document.querySelectorAll('.nav-tab-item');
+        let currentSlide   = 0;
+
+        function scrollToSlide(index) {
+            if (slides[index]) slides[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sync nav + trigger animations on scroll
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = [...slides].indexOf(entry.target);
+                    currentSlide = index;
+
+                    navDots.forEach((dot, i)     => dot.classList.toggle('active', i === index));
+                    navTabItems.forEach((tab, i) => tab.classList.toggle('active', i === index));
+                    if (navTabItems[index]) navTabItems[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+                    entry.target.querySelectorAll('.animate-in').forEach(el => {
+                        if (!el.classList.contains('triggered')) {
+                            el.classList.add('triggered');
+                            el.style.animationPlayState = 'running';
+                        }
+                    });
+
+                    if (index === 6) triggerIPCards();
+                }
+            });
+        }, { threshold: 0.4 });
+
+        slides.forEach(s => slideObserver.observe(s));
+
+        // IP cards sequential reveal
+        function triggerIPCards() {
+            document.querySelectorAll('#ipGrid .ip-card').forEach((card, i) => {
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                    card.style.animationDelay = '0s';
+                }, i * 80 + 600);
+            });
+        }
+
+        // Reset animations when slide leaves view
+        const replayObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    entry.target.querySelectorAll('.animate-in.triggered').forEach(el => {
+                        el.classList.remove('triggered');
+                        el.style.animationPlayState = 'paused';
+                        void el.offsetHeight;
+                    });
+                    if ([...slides].indexOf(entry.target) === 6) {
+                        document.querySelectorAll('#ipGrid .ip-card').forEach(c => c.classList.remove('animate-in'));
+                    }
+                }
+            });
+        }, { threshold: 0.05 });
+
+        slides.forEach(s => replayObserver.observe(s));
+
+        // Photo cell fallback
+        document.querySelectorAll('.photo-cell img').forEach(img => {
+            img.addEventListener('load', () => {
+                const ph = img.parentElement.querySelector('.photo-cell-placeholder');
+                if (ph) ph.style.display = 'none';
+            });
+            if (img.complete && img.naturalWidth > 0) {
+                const ph = img.parentElement.querySelector('.photo-cell-placeholder');
+                if (ph) ph.style.display = 'none';
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSlide < slides.length - 1) scrollToSlide(currentSlide + 1);
+            }
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (currentSlide > 0) scrollToSlide(currentSlide - 1);
+            }
+        });
+    </script>
+
+</body>
+</html>
