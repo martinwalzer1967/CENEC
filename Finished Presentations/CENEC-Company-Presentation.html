@@ -181,7 +181,8 @@
         .storage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
         .storage-card { background: rgba(78,204,163,0.06); border: 1px solid rgba(78,204,163,0.16); border-radius: 10px; padding: 20px; transition: all 0.3s ease; }
         .storage-card:hover { background: rgba(78,204,163,0.11); border-color: rgba(78,204,163,0.35); transform: translateY(-2px); }
-        .storage-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+        .storage-card-icon { width: 52px; height: 52px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; background: rgba(78,204,163,0.1); border: 1px solid rgba(78,204,163,0.2); border-radius: 12px; }
+        .storage-card-icon svg { width: 28px; height: 28px; }
         .storage-card-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 700; color: var(--cenec-green); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
         .storage-card-label { font-family: var(--font-heading); font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
         .storage-card-desc { font-size: 0.82rem; font-weight: 300; opacity: 0.7; line-height: 1.5; }
@@ -560,25 +561,41 @@
                 <p class="animate-in" style="animation-delay: 0.4s;">Renewable energy from solar and wind are the cheapest form of energy production — but the sun doesn't always shine, and the wind doesn't always blow. CENEC's storage technologies bridge that gap.</p>
                 <div class="storage-grid animate-in" style="animation-delay: 0.55s;">
                     <div class="storage-card">
-                        <div class="storage-card-icon">⚡</div>
+                        <div class="storage-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4ecca3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
                         <div class="storage-card-title">BESS</div>
                         <div class="storage-card-label">Battery Energy Storage</div>
                         <div class="storage-card-desc">Lithium technology, reliable power up to 5 hours</div>
                     </div>
                     <div class="storage-card">
-                        <div class="storage-card-icon">🔋</div>
+                        <div class="storage-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4ecca3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="10" x2="23" y2="14"/><path d="M6 10v4"/><path d="M10 10v4"/><path d="M14 10v4"/>
+                            </svg>
+                        </div>
                         <div class="storage-card-title">LDES</div>
                         <div class="storage-card-label">Long Duration Storage</div>
                         <div class="storage-card-desc">Extended duration — coming soon</div>
                     </div>
                     <div class="storage-card">
-                        <div class="storage-card-icon">🌡️</div>
+                        <div class="storage-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4ecca3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/><line x1="11.5" y1="8" x2="11.5" y2="15"/>
+                            </svg>
+                        </div>
                         <div class="storage-card-title">TES</div>
                         <div class="storage-card-label">Thermal Energy Storage</div>
                         <div class="storage-card-desc">High-temperature heat, 24/7/365 delivery</div>
                     </div>
                     <div class="storage-card">
-                        <div class="storage-card-icon">💧</div>
+                        <div class="storage-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4ecca3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C12 2 5 9.5 5 14a7 7 0 0 0 14 0C19 9.5 12 2 12 2z"/><path d="M12 22v-4"/><circle cx="12" cy="14" r="2" fill="rgba(78,204,163,0.3)"/>
+                            </svg>
+                        </div>
                         <div class="storage-card-title">H₂ Storage</div>
                         <div class="storage-card-label">Hydrogen Storage</div>
                         <div class="storage-card-desc">Steam-iron process, lowest cost available</div>
